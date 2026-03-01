@@ -12,8 +12,6 @@ It provides authentication, role-based access (admin/student), and REST API CRUD
 - Courses
 - Enrollments
 
-The project is designed for VM deployment (no serverless requirement) and follows assignment constraints.
-
 ## Tech Stack
 - Next.js 16 (App Router)
 - React 19
