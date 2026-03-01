@@ -22,8 +22,12 @@ export default function MyCourses() {
   async function unenroll(id) {
     const res = await fetch(`/api/enrollments/${id}`, { method: "DELETE" });
     const data = await res.json();
-    if (!res.ok) alert(data.error || "Failed");
-    else load();
+    if (!res.ok) {
+      setMsg(data.error || "Failed to unenroll");
+      return;
+    }
+    setMsg("Unenrolled successfully");
+    void load();
   }
 
   useEffect(() => {

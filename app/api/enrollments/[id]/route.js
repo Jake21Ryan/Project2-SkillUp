@@ -33,14 +33,17 @@ export async function DELETE(req, { params }) {
     const session = await requireSession();
     const { id } = await params;
 
-    const enr = await Enrollment.findById(id);
-    if (!enr) return NextResponse.json({ error: "Not found" }, { status: 404 });
-
-    if (session.role !== "admin" && String(enr.userId) !== String(session.userId)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    if (session.role === "admin") {
+      const deleted = await Enrollment.findByIdAndDelete(id);
+      if (!deleted) return NextResponse.json({ error: "Not found" }, { status: 404 });
+      return NextResponse.json({ ok: true });
     }
 
-    await Enrollment.findByIdAndDelete(id);
+    const deleted = await Enrollment.findOneAndDelete({ _id: id, userId: session.userId });
+    if (!deleted) {
+      return NextResponse.json({ error: "Not found or forbidden" }, { status: 404 });
+    }
+
     return NextResponse.json({ ok: true });
   } catch (error) {
     if (error.message === "Unauthorized") {
