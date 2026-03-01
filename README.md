@@ -1,9 +1,9 @@
 # SkillUp — Mini Learning System (Next.js + MongoDB)
 
 ## Team Members
-- Xavier — https://github.com/cyon003
+- AungHlaingHtwe(6612119) — https://github.com/cyon003
 - Aung Myint Myat(6611906) — https://github.com/Jake21Ryan
-- Member 3 — https://github.com/<member3-username>
+- Lwin Htoo Aung(6612110) — https://github.com/<member3-username>
 
 ## Project Description
 SkillUp is a mini learning platform built with **Next.js (App Router, JavaScript)** and **MongoDB**.  
