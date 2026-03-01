@@ -7,7 +7,8 @@ export async function GET(req, { params }) {
   try {
     await dbConnect();
     await requireSession();
-    const course = await Course.findById(params.id);
+    const { id } = await params;
+    const course = await Course.findById(id);
     if (!course) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ ok: true, course });
   } catch (error) {
@@ -22,8 +23,9 @@ export async function PUT(req, { params }) {
   try {
     await dbConnect();
     await requireAdmin();
+    const { id } = await params;
     const body = await req.json();
-    const updated = await Course.findByIdAndUpdate(params.id, body, { new: true });
+    const updated = await Course.findByIdAndUpdate(id, body, { new: true });
     if (!updated) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ ok: true, course: updated });
   } catch (error) {
@@ -41,7 +43,8 @@ export async function DELETE(req, { params }) {
   try {
     await dbConnect();
     await requireAdmin();
-    const deleted = await Course.findByIdAndDelete(params.id);
+    const { id } = await params;
+    const deleted = await Course.findByIdAndDelete(id);
     if (!deleted) return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json({ ok: true });
   } catch (error) {
